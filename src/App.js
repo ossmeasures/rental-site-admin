@@ -18,6 +18,9 @@ const items = [
         mission: "5速MT",
         description:
             "準中型ＭＴ免許ＯＫ　２トン２ｔベース１．５トン１．５ｔ積載　パネルバン左扉ありリア観音扉　全低床　ディーゼルＮＯＸｐｍ法適合車　車検時記録簿１６枚あり　全高２７３ｃｍトラック　３人乗り　ＭＴ５速",
+        orderStatus: "レンタル中",
+        rentalTermTo: "2020/02/26",
+        rentalTermFrom: "2020/02/18"
     },
     {
         id: "2",
@@ -32,6 +35,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "注文処理中",
+        rentalTermTo: "2020/02/09",
+        rentalTermFrom: "2020/02/01"
     },
     {
         id: "3",
@@ -46,6 +52,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "注文処理中",
+        rentalTermTo: "2020/01/18",
+        rentalTermFrom: "2020/01/02"
     },
     {
         id: "4",
@@ -60,6 +69,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "注文処理中",
+        rentalTermTo: "2020/01/29",
+        rentalTermFrom: "2020/01/10"
     },
     {
         id: "5",
@@ -74,6 +86,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "レンタル中",
+        rentalTermTo: "2020/02/18",
+        rentalTermFrom: "2020/01/25"
     },
     {
         id: "6",
@@ -88,6 +103,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "注文処理中",
+        rentalTermTo: "2020/02/18",
+        rentalTermFrom: "2020/02/25"
     },
     {
         id: "7",
@@ -102,6 +120,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "注文処理中",
+        rentalTermTo: "2020/02/18",
+        rentalTermFrom: "2020/02/25"
     },
     {
         id: "8",
@@ -116,6 +137,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "レンタル中",
+        rentalTermTo: "2020/02/18",
+        rentalTermFrom: "2020/02/25"
     },
     {
         id: "9",
@@ -130,6 +154,9 @@ const items = [
         hasWarranty: false,
         mission: "5速MT",
         description: "説明文",
+        orderStatus: "未レンタル",
+        rentalTermTo: "2020/02/18",
+        rentalTermFrom: "2020/02/25"
     },
 ];
 
@@ -140,26 +167,45 @@ const styleCenter = {
     height: '60px'
 };
 
+const styleColor = (orderStatus) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '60px',
+    color: orderStatus === "レンタル中" || orderStatus === "配送中" ? 'orange' : 'gray'
+});
+
 function App() {
 
     return (
         <div className="App">
-            <Button appearance="primary"> Hello world </Button>
             <List>
                 {items.map((item, index) => (
                     <List.Item key={index} index={index}>
                         <FlexboxGrid>
-                            <FlexboxGrid.Item colspan={8} style={styleCenter}>
+                            <FlexboxGrid.Item colspan={6} style={styleCenter}>
                                 {item['name']}
                             </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={2} style={styleCenter}>
+                            <FlexboxGrid.Item colspan={3} style={styleCenter}>
                                 {item['category']}
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={3} style={styleColor(item['orderStatus'])}>
+                                {item['orderStatus']}
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={4} style={styleCenter}>
+                                {item['rentalTermFrom']}
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={4} style={styleCenter}>
+                                {item['rentalTermTo']}
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={3} style={styleCenter}>
+                                <Button color="orange" appearance="ghost"> 詳細 </Button>
                             </FlexboxGrid.Item>
                         </FlexboxGrid>
                     </List.Item>
                 ))}
             </List>
-        </div>
+        </div >
     );
 }
 
