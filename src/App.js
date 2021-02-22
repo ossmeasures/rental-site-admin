@@ -2,6 +2,8 @@ import 'rsuite/lib/styles/index.less';
 import { Button, FlexboxGrid } from 'rsuite';
 import './App.css';
 import { List } from 'rsuite';
+import React from "react";
+import Modal from "react-modal";
 
 const items = [
     {
@@ -175,7 +177,28 @@ const styleColor = (orderStatus) => ({
     color: orderStatus === "レンタル中" || orderStatus === "配送中" ? 'orange' : 'gray'
 });
 
+const modalStyle = {
+    overlay: {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        backgroundColor: "rgba(0,0,0,0.5)"
+    },
+    content: {
+        position: "absolute",
+        top: "5rem",
+        left: "5rem",
+        right: "5rem",
+        bottom: "5rem",
+        backgroundColor: "paleturquoise",
+        borderRadius: "1rem",
+        padding: "1.5rem"
+    }
+};
+
 function App() {
+
+    const [modalIsOpen, setIsOpen] = React.useState(false);
 
     return (
         <div className="App">
@@ -199,7 +222,22 @@ function App() {
                                 {item['rentalTermTo']}
                             </FlexboxGrid.Item>
                             <FlexboxGrid.Item colspan={3} style={styleCenter}>
-                                <Button color="orange" appearance="ghost"> 詳細 </Button>
+                                <Button color="orange" appearance="ghost" onClick={() => setIsOpen(true)}> 詳細 </Button>
+                                <Modal isOpen={modalIsOpen} style={modalStyle} onRequestClose={() => setIsOpen(false)}
+                                    overlayClassName={{
+                                        base: "overlay-base",
+                                        afterOpen: "overlay-after",
+                                        beforeClose: "overlay-before"
+                                    }}
+                                    className={{
+                                        base: "content-base",
+                                        afterOpen: "content-after",
+                                        beforeClose: "content-before"
+                                    }}
+                                    closeTimeoutMS={500}>
+                                    <h2>{item['name']}</h2>
+                                    <button onClick={() => setIsOpen(false)}>とじる</button>
+                                </Modal>
                             </FlexboxGrid.Item>
                         </FlexboxGrid>
                     </List.Item>
