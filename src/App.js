@@ -1,9 +1,10 @@
 import 'rsuite/lib/styles/index.less';
-import { Button, FlexboxGrid } from 'rsuite';
+import { Button, FlexboxGrid, Modal } from 'rsuite';
 import './App.css';
 import { List } from 'rsuite';
 import React from "react";
-import Modal from "react-modal";
+import BasicModal from './components/BasicModal';
+
 
 const items = [
     {
@@ -22,7 +23,9 @@ const items = [
             "準中型ＭＴ免許ＯＫ　２トン２ｔベース１．５トン１．５ｔ積載　パネルバン左扉ありリア観音扉　全低床　ディーゼルＮＯＸｐｍ法適合車　車検時記録簿１６枚あり　全高２７３ｃｍトラック　３人乗り　ＭＴ５速",
         orderStatus: "レンタル中",
         rentalTermTo: "2020/02/26",
-        rentalTermFrom: "2020/02/18"
+        rentalTermFrom: "2020/02/18",
+        deliveryAddress: "東京都江東区４－４－１",
+        user: { name: "長谷川", email: "test@com" }
     },
     {
         id: "2",
@@ -222,22 +225,7 @@ function App() {
                                 {item['rentalTermTo']}
                             </FlexboxGrid.Item>
                             <FlexboxGrid.Item colspan={3} style={styleCenter}>
-                                <Button color="orange" appearance="ghost" onClick={() => setIsOpen(true)}> 詳細 </Button>
-                                <Modal isOpen={modalIsOpen} style={modalStyle} onRequestClose={() => setIsOpen(false)}
-                                    overlayClassName={{
-                                        base: "overlay-base",
-                                        afterOpen: "overlay-after",
-                                        beforeClose: "overlay-before"
-                                    }}
-                                    className={{
-                                        base: "content-base",
-                                        afterOpen: "content-after",
-                                        beforeClose: "content-before"
-                                    }}
-                                    closeTimeoutMS={500}>
-                                    <h2>{item['name']}</h2>
-                                    <button onClick={() => setIsOpen(false)}>とじる</button>
-                                </Modal>
+                                <BasicModal item={item} />
                             </FlexboxGrid.Item>
                         </FlexboxGrid>
                     </List.Item>
