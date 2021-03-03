@@ -1,9 +1,10 @@
 import 'rsuite/lib/styles/index.less';
-import { Button, FlexboxGrid, Modal } from 'rsuite';
+import { FlexboxGrid, Sidenav, Icon, Nav, Dropdown, Container, Header, Content, Footer, Sidebar } from 'rsuite';
 import './App.css';
 import { List } from 'rsuite';
 import React from "react";
 import BasicModal from './components/BasicModal';
+import SideNav from './components/SideNav';
 
 
 const items = [
@@ -180,57 +181,54 @@ const styleColor = (orderStatus) => ({
     color: orderStatus === "レンタル中" || orderStatus === "配送中" ? 'orange' : 'gray'
 });
 
-const modalStyle = {
-    overlay: {
-        position: "fixed",
-        top: 0,
-        left: 0,
-        backgroundColor: "rgba(0,0,0,0.5)"
-    },
-    content: {
-        position: "absolute",
-        top: "5rem",
-        left: "5rem",
-        right: "5rem",
-        bottom: "5rem",
-        backgroundColor: "paleturquoise",
-        borderRadius: "1rem",
-        padding: "1.5rem"
-    }
-};
+
 
 function App() {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     return (
+
         <div className="App">
-            <List>
-                {items.map((item, index) => (
-                    <List.Item key={index} index={index}>
-                        <FlexboxGrid>
-                            <FlexboxGrid.Item colspan={6} style={styleCenter}>
-                                {item['name']}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={3} style={styleCenter}>
-                                {item['category']}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={3} style={styleColor(item['orderStatus'])}>
-                                {item['orderStatus']}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={4} style={styleCenter}>
-                                {item['rentalTermFrom']}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={4} style={styleCenter}>
-                                {item['rentalTermTo']}
-                            </FlexboxGrid.Item>
-                            <FlexboxGrid.Item colspan={3} style={styleCenter}>
-                                <BasicModal item={item} />
-                            </FlexboxGrid.Item>
-                        </FlexboxGrid>
-                    </List.Item>
-                ))}
-            </List>
+            <Container>
+                <Header>管理者画面</Header>
+                <Container>
+                    <Sidebar>
+                        <SideNav />
+                    </Sidebar>
+                    <Content>
+                        <List>
+                            {items.map((item, index) => (
+                                <List.Item key={index} index={index}>
+                                    <FlexboxGrid>
+                                        <FlexboxGrid.Item colspan={6} style={styleCenter}>
+                                            {item['name']}
+                                        </FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={3} style={styleCenter}>
+                                            {item['category']}
+                                        </FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={3} style={styleColor(item['orderStatus'])}>
+                                            {item['orderStatus']}
+                                        </FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={4} style={styleCenter}>
+                                            {item['rentalTermFrom']}
+                                        </FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={4} style={styleCenter}>
+                                            {item['rentalTermTo']}
+                                        </FlexboxGrid.Item>
+                                        <FlexboxGrid.Item colspan={3} style={styleCenter}>
+                                            <BasicModal item={item} />
+                                        </FlexboxGrid.Item>
+                                    </FlexboxGrid>
+                                </List.Item>
+                            ))}
+                        </List>
+                    </Content>
+                </Container>
+                <Footer></Footer>
+            </Container>
+
+
         </div >
     );
 }
