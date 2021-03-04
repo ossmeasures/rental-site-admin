@@ -1,4 +1,4 @@
-import { Sidenav, FlexboxGrid, Icon, Nav, Dropdown } from 'rsuite';
+import { Sidenav, Icon, Nav, Dropdown } from 'rsuite';
 import React from 'react';
 
 class SideNav extends React.Component {
