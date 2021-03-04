@@ -193,12 +193,15 @@ const styleColor = (orderStatus) => ({
 function App() {
   return (
     <div className="App">
-      <Container>
-        <Header>管理者画面</Header>
-        <Container>
-          <Sidebar>
-            <SideNav />
-          </Sidebar>
+      <Container className="frame">
+        <Sidebar>
+          <SideNav />
+        </Sidebar>
+
+        <Container className="mainContainer">
+          <Header>
+            <h2>管理者画面</h2>
+          </Header>
           <Content>
             <List>
               {items.map((item, index) => (
